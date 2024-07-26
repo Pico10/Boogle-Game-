@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Over</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <h1>Juego Terminado</h1>
+        <p>Gracias por jugar, <span id="player-name"></span>!</p>
+        <p>Tu puntaje final es: <span id="final-score"></span></p>
+        <button id="play-again">Jugar de Nuevo</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const playerName = localStorage.getItem('playerName');
+            const score = localStorage.getItem('score');
+            
+            document.getElementById('player-name').textContent = playerName;
+            document.getElementById('final-score').textContent = score;
+
+            document.getElementById('play-again').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>

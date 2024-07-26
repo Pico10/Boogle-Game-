@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Letras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <div id="player-form-container">
+            <form id="player-form">
+                <label for="player-name">Nombre del Jugador:</label>
+                <input type="text" id="player-name" required>
+                <button type="submit">Iniciar Juego</button>
+            </form>
+        </div>
+        
+        <div id="game-board" class="hidden">
+            <div id="info">
+                <div id="timer">Tiempo: 180s</div>
+                <div id="score">Puntaje: 0</div>
+            </div>
+            <div id="board" class="board"></div>
+            <div id="controls">
+                <div id="current-word-container">
+                    <label>Palabra Actual:</label>
+                    <span id="current-word"></span>
+                </div>
+                <button id="delete-word">Eliminar Palabra</button>
+                <button id="validate-word">Validar Palabra</button>
+                <button id="shuffle-board">Mezclar Tablero</button>
+                <button id="end-game">Finalizar Juego</button>
+            </div>
+            <div id="found-words">
+                <h3>Palabras Encontradas:</h3>
+                <ul id="word-list"></ul>
+            </div>
+        </div>
+        
+        <div id="message"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
