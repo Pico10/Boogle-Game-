@@ -9,6 +9,36 @@ body {
     color: #ecf0f1;
 }
 
+#start-screen {
+    text-align: center;
+    animation: fadeIn 2s ease-in-out;
+}
+
+#start-screen h1 {
+    font-size: 3rem;
+    color: #e74c3c;
+}
+
+#start-screen p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
+
+#start-screen button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#start-screen button:hover {
+    background-color: #c0392b;
+}
+
 #container {
     display: flex;
     flex-direction: column;
@@ -150,4 +180,13 @@ h1 {
 #final-score {
     font-weight: bold;
     color: #f39c12;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
