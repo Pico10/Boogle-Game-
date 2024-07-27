@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function endGame() {
         localStorage.setItem('playerName', playerNameInput.value);
         localStorage.setItem('score', score);
-        window.location.href = 'gameover.html';
+        window.location.href = 'GameOver.html';
     }
 
     // Reiniciar el juego
