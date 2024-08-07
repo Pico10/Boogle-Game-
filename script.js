@@ -97,42 +97,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Validar la palabra seleccionada
-    function validateWord(word) {
-        if (word.length < 3) {
-            showMessage('La palabra debe tener al menos 3 letras.');
-            deleteWordButton.click();
-            return;
-        }
+    // Penalización por palabras incorrectas
+const penalty = 2; // Ajusta este valor según lo que consideres apropiado
 
-        if (wordsFound.includes(word)) {
-            showMessage('Esta palabra ya ha sido encontrada.');
-            deleteWordButton.click();
-            return;
-        }
-
-        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.title !== 'No Definitions Found') {
-                    wordsFound.push(word);
-                    score += calculateScore(word.length);
-                    scoreElement.textContent = 'Puntaje: ' + score;
-                    wordListElement.innerHTML += `<li>${word}</li>`;
-                    currentWord = '';
-                    currentWordPath = [];
-                    currentWordElement.textContent = '';
-                    clearSelectedCells();
-                    showMessage('Palabra válida', 'success');
-                } else {
-                    showMessage('Palabra no válida');
-                    deleteWordButton.click();
-                }
-            })
-            .catch(error => {
-                console.error('Error al validar la palabra:', error);
-                showMessage('Error al validar la palabra');
-            });
+// Validar la palabra seleccionada
+function validateWord(word) {
+    if (word.length < 3) {
+        showMessage('La palabra debe tener al menos 3 letras.');
+        deleteWordButton.click();
+        score -= penalty; // Penalizar el puntaje
+        scoreElement.textContent = 'Puntaje: ' + score;
+        return;
     }
+
+    if (wordsFound.includes(word)) {
+        showMessage('Esta palabra ya ha sido encontrada.');
+        deleteWordButton.click();
+        score -= penalty; // Penalizar el puntaje
+        scoreElement.textContent = 'Puntaje: ' + score;
+        return;
+    }
+
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.title !== 'No Definitions Found') {
+                wordsFound.push(word);
+                score += calculateScore(word.length);
+                scoreElement.textContent = 'Puntaje: ' + score;
+                wordListElement.innerHTML += `<li>${word}</li>`;
+                currentWord = '';
+                currentWordPath = [];
+                currentWordElement.textContent = '';
+                clearSelectedCells();
+                showMessage('Palabra válida', 'success');
+            } else {
+                showMessage('Palabra no válida');
+                deleteWordButton.click();
+                score -= penalty; // Penalizar el puntaje
+                scoreElement.textContent = 'Puntaje: ' + score;
+            }
+        })
+        .catch(error => {
+            console.error('Error al validar la palabra:', error);
+            showMessage('Error al validar la palabra');
+            score -= penalty; // Penalizar el puntaje
+            scoreElement.textContent = 'Puntaje: ' + score;
+        });
+}
 
     // Calcular el puntaje según la longitud de la palabra
     function calculateScore(length) {
