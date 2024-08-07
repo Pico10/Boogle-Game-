@@ -1,5 +1,3 @@
-'use strict';
-
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener referencias a los elementos del DOM
     const playerForm = document.getElementById('player-form');
@@ -85,12 +83,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Verificar si la selección de la celda es válida
     function isValidSelection(index) {
         const lastIndex = currentWordPath[currentWordPath.length - 1];
-        const validMoves = [
-            lastIndex - 5, lastIndex - 4, lastIndex - 3,
-            lastIndex - 1, lastIndex + 1,
-            lastIndex + 3, lastIndex + 4, lastIndex + 5
+        const adjacentIndices = [
+            lastIndex - 1, // izquierda
+            lastIndex + 1, // derecha
+            lastIndex - 5, // arriba
+            lastIndex + 5, // abajo
+            lastIndex - 4, // arriba izquierda
+            lastIndex + 4, // abajo derecha
+            lastIndex - 6, // arriba derecha
+            lastIndex + 6 // abajo izquierda
         ];
-        return validMoves.includes(index) && !currentWordPath.includes(index);
+        return adjacentIndices.includes(index) && !currentWordPath.includes(index);
     }
 
     // Validar la palabra seleccionada
@@ -210,3 +213,14 @@ document.addEventListener('DOMContentLoaded', function() {
     shuffleBoardButton.addEventListener('click', shuffleBoard);
     endGameButton.addEventListener('click', endGame);
 });
+
+
+const contactFormContainer = document.getElementById('contact-form-container');
+const contactLink = document.querySelector('a[href="#contact-form"]');
+
+contactLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    contactFormContainer.style.display = 'block';
+});
+
+
